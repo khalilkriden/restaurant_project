@@ -114,6 +114,7 @@ def login_view(request):
             return render(request, 'restaurant/login.html')
     return render(request, 'restaurant/login.html')
 
+
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged out successfully!")

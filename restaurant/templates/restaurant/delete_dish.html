@@ -1,0 +1,21 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-4">Delete Dish 🗑️</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <p class="text-center">Are you sure you want to delete <strong>{{ dish.name }}</strong>?</p>
+                <div class="d-flex justify-content-between mt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    </form>
+                    <a href="{% url 'menu' %}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4 mt-4">Welcome to Our Restaurant! 🍽️</h1>
+    <p class="lead mt-3">Discover our delicious dishes and reserve your table today.</p>
+    <a href="{% url 'menu' %}" class="btn btn-primary btn-lg mt-4">Explore Our Menu</a>
+</div>
+
+<hr class="my-5">
+
+<h2 class="text-center mb-4">Some of Our Dishes</h2>
+
+<div class="row">
+    {% for dish in dishes|slice:":3" %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}" style="height: 250px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                <p class="card-text">{{ dish.description|truncatewords:15 }}</p>
+                <p class="card-text"><strong>${{ dish.price }}</strong></p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No dishes available yet!</p>
+    {% endfor %}
+</div>
+{% endblock %}

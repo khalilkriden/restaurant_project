@@ -1,0 +1,21 @@
+# Ignore the virtual environment
+.venv2/
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore database (optional if using MySQL)
+db.sqlite3
+
+# Ignore uploads (optional)
+media/
+
+# Ignore secrets
+.env
+
+# Ignore Mac system files
+.DS_Store

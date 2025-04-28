@@ -18,13 +18,20 @@ def menu(request):
         dishes = Dish.objects.filter(name__icontains=query)
     else:
         dishes = Dish.objects.all()
+    category = request.GET.get('c')
+    if category:
+        dishes = Dish.objects.filter(category__iexact=category)
+    else:
+        dishes = Dish.objects.all()
 
     paginator = Paginator(dishes, 6)
     page = request.GET.get('page')
     dishes = paginator.get_page(page)
 
     return render(request, 'restaurant/menu.html', {'dishes': dishes})
-
+def dish_detail(request, pk):
+    dish=get_object_or_404(Dish, pk=pk)
+    return render(request, 'restaurant/dish_detail.html',{'dish' : dish})
 
 @login_required
 def add_dish(request):

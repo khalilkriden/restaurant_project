@@ -19,6 +19,7 @@ class Dish(models.Model):
 
 class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE,null=True,blank=True)
     date = models.DateField()
     time = models.TimeField()
     number_of_people = models.IntegerField()

@@ -8,25 +8,31 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 </div>
+<div class="mb-4">
+    <a href="{% url 'menu' %}" class="btn btn-outline-primary">All</a>
+    <a href="{% url 'menu' %}?category=Starter" class="btn btn-outline-success">Starter</a>
+    <a href="{% url 'menu' %}?category=Main Course" class="btn btn-outline-warning">Main Course</a>
+    <a href="{% url 'menu' %}?category=Dessert" class="btn btn-outline-danger">Dessert</a>
+</div>
 
 <div class="row">
     {% for dish in dishes %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}" style="height: 250px; object-fit: cover;">
-            <div class="card-body">
-                <h5 class="card-title">{{ dish.name }}</h5>
-                <p class="card-text">{{ dish.description|truncatewords:20 }}</p>
-                <p class="card-text"><strong>${{ dish.price }}</strong></p>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <a href="{% url 'dish_detail' dish.pk %}">
+                    <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}" style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description|truncatewords:20 }}</p>
+                        <p class="card-text"><strong>${{ dish.price }}</strong></p>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
     {% empty %}
-    <p class="text-center">No dishes found.</p>
+        <p class="text-center">No dishes found.</p>
     {% endfor %}
 </div>
-
-<!-- Pagination -->
 <div class="d-flex justify-content-center mt-4">
     {% if dishes.has_previous %}
         <a class="btn btn-outline-primary me-2" href="?page={{ dishes.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
@@ -38,4 +44,5 @@
         <a class="btn btn-outline-primary ms-2" href="?page={{ dishes.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
     {% endif %}
 </div>
+
 {% endblock %}

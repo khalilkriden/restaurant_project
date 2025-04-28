@@ -11,7 +11,7 @@ class DishForm(forms.ModelForm):
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['date', 'time', 'number_of_people', 'special_request']
+        fields = ['dish','date', 'time', 'number_of_people', 'special_request']
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
